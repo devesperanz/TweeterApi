@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tweets",
+  "info": {
+    "name": "tweet",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tweet": {
+      "type": "text",
+      "required": true,
+      "maxLength": 180,
+      "minLength": 2
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "device": {
+      "type": "enumeration",
+      "enum": [
+        "Web",
+        "iPhone",
+        "Andriod"
+      ],
+      "required": true,
+      "default": "Web"
+    },
+    "users_permissions_user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "tweets"
+    },
+    "likes": {
+      "plugin": "users-permissions",
+      "collection": "user",
+      "via": "likedTweets"
+    },
+    "comments": {
+      "collection": "comment"
+    }
+  }
+}
